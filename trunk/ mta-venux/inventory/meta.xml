@@ -1,0 +1,22 @@
+<meta>
+  <info author="VenuX Scripting Team" />
+
+  <!-- Scripts -->
+  <script src="inventory_s.lua" type="server" />
+  
+  <script src="inventory_c.lua" type="client" />
+
+  
+  <!-- Images -->
+  <file src="items/1.png"/>
+  <file src="items/2.png"/>
+  
+  <!-- Exported functions -->
+  <export function="load" type="server" http="false" />
+  <export function="remove" type="server" http="false" />
+  <export function="reload" type="server" http="false" />
+  <export function="getItemsTable" type="server" http="false" />
+  <export function="add" type="server" http="false" />
+  <export function="has" type="server" />
+  
+</meta>

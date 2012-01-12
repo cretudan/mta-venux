@@ -1,0 +1,19 @@
+<meta>
+ <info author="VenuX Scripting Team"/>
+
+  <script src="s_cursor.lua"  type="server"/>
+  <script src="util_s.lua" type="server"/>
+  <script src="g_character.lua" type="server"/>
+  <script src="g_admin.lua" type="server"/>
+
+  <export function="findPlayerByPartialNick" type="server"/>
+  
+  <export function="isPlayerTrial" type="server"/>
+  <export function="isPlayerMod" type="server"/>
+  <export function="isPlayerAdmin" type="server"/>
+  <export function="isPlayerSuperAdmin" type="server"/>
+  <export function="isPlayerHeadAdmin" type="server"/>
+  <export function="isPlayerOwner" type="server"/>
+  <export function="isPlayerDeveloper" type="server"/>
+  
+</meta>

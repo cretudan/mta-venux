@@ -1,0 +1,13 @@
+<meta>
+  <info author="VenuX Scripting Team" />
+
+  <script src="s_vehicle.lua" type="server" />
+  <script src="c_vehicle.lua" type="client" />
+
+  <export function="_vehicleSave" type="server" http="false" />
+  <export function="_reloadVehicle" type="server" http="false" />
+  <export function="makeVehicle" type="server" http="false" />
+  <export function="removeVehicleLocks" type="server" http="false" />
+  <export function="repairVehicle" type="server" http="false" />
+  
+</meta>

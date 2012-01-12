@@ -1,0 +1,14 @@
+<meta>
+  <info author="VenuX Scripting Team"/>
+
+  <script src="c_account.lua"  type="client"/>
+  
+  
+  <script src="s_account.lua"  type="server"/>
+
+  <export function="getCharacterName" type="server" http="false" />
+  <export function="getCharacterExists" type="server" http="false" />
+  <export function="getCharacterID" type="server" http="false" />
+  <export function="onCharacterSpawned" type="server" http="false" />
+
+</meta>

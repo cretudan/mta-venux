@@ -1,0 +1,7 @@
+<meta>
+  <info author="VenuX Scripting Team" />
+
+  <script src="s_save.lua" type="server"/>
+
+  <export function="savePlayer" type="server" />
+</meta>

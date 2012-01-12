@@ -1,0 +1,9 @@
+<meta>
+	<info author="'ryden' Edited by: Lukkaz"/>
+	
+	<script src="c_scoreboard.lua" type="client" />
+	<script src="s_scoreboard.lua" type="server" />
+	<script src="s_id.lua" type="server" />
+	
+	<export function="isVisible" type="client" />
+</meta>

@@ -1,0 +1,8 @@
+<meta>
+ <info author="AeroXbird & Lukkaz"/>
+
+<script src="s_binds.lua"  type="server"/>
+<script src="s_chat.lua"  type="server"/>
+
+  <export function="meAction" type="server" http="false" />
+</meta>
