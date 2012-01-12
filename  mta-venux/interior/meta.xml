@@ -1,0 +1,7 @@
+<meta>
+  <info author="VenuX Scripting Team" />
+
+  <script src="s_interior.lua" type="server" />
+  <script src="c_interior.lua" type="client" />
+  
+</meta>

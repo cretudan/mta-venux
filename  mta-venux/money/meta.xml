@@ -1,0 +1,11 @@
+<meta>
+  <info author="VenuX Scripting Team" />
+
+  <script src="s_money.lua" type="server" />
+
+  <export function="getMoney" type="server" />
+  <export function="takeMoney" type="server" />
+  <export function="giveMoney" type="server"/>
+  <export function="hasMoney" type="server"/>
+  
+</meta>
