@@ -9,5 +9,6 @@
   <export function="makeVehicle" type="server" http="false" />
   <export function="removeVehicleLocks" type="server" http="false" />
   <export function="repairVehicle" type="server" http="false" />
+  <export function="getVehicleByID" type="server" http="false" />
   
 </meta>

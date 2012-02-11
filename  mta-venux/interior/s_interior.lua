@@ -75,7 +75,7 @@ function markerTriggerHandler( hitElement, matchingDimension )
 			
 			p [ hitElement ] = source
 			bindKey( hitElement, "enter_exit", "down", enterInterior, p[ hitElement ] )
-			bindKey(player, "k", "down", lockInterior, interiorID)
+			bindKey( hitElement, "k", "down", lockInterior, interiorID)
 
 			triggerClientEvent(hitElement, "prepInfoHUD", hitElement, interiors[ interiorID ])
 		else
@@ -92,7 +92,7 @@ function markerExitTriggerHandler( leftElement, matchingDimension )
 	if ( getElementType( leftElement ) == "player"  and getElementType( source ) == "marker" ) then
 		if ( getElementData( source, "interiorID" ) ) then
 			
-			unbindKey(player, "k", "down", lockInterior, interiorID)
+			unbindKey( leftElement, "k", "down", lockInterior, getElementData( source, "interiorID" ))
 			triggerClientEvent(leftElement, "prepInfoHUD", leftElement)
 			unbindKey( leftElement, "enter_exit", "down", enterInterior, p[ leftElement ])
 		end
@@ -105,12 +105,9 @@ function enterInterior( player, key, state, marker )
 		if ( getElementDimension( player ) == getElementDimension( marker ) ) then -- this is for future implentation of multi-dimensional markers.
 			local interiorID = getElementData( marker, "interiorID" )
 			local locked = interiors[ interiorID ].locked
-
-			if ( locked == 0 ) then -- unlocked
-				allowInteriorTeleport( player, marker )
-			elseif ( locked == 1 ) then
+			local owner = interiors[ interiorID ].owner
 				
-			elseif ( owner == 0 ) then -- unowned interior
+			if ( owner == 0 ) then -- unowned interior
 				if ( interiors[ interiorID ].type == 1 or interiors[ interiorID ].type == 2 ) then -- house or business
 					local buyermoney = exports.money:getMoney( player )
 					local interiorcost = tonumber( interiors[ interiorID ].cost )
@@ -118,10 +115,12 @@ function enterInterior( player, key, state, marker )
 
 					if ( buyermoney >= interiorcost ) then
 						local process = exports.money:takeMoney( player, interiorcost )
-							if ( process == true, rest ) then
-								local query, error = exports.sql:query_free("UPDATE `interiors` SET owner = '".. getElementData( player, "characterID" ) .."' WHERE id = '".. interiorID .."'")
+							if ( process == true ) then
+								local query, error = exports.sql:query_free("UPDATE `interiors` SET owner = '".. exports.account:getCharacterName( getElementData( player, "characterID" ) ) .."' WHERE id = '".. interiorID .."'")
 									if ( query ) then
-										outputChatBox("You have successfully purchased the property: ".. interiors[ interiorID ].name ..".  For sum of: ".. interiors[ interiorID ].cost .."!", player, 0, 200, 0 )
+										interiors[ interiorID ].owner = exports.account:getCharacterName( getElementData( player, "characterID" ) )
+										outputChatBox("You have successfully purchased the property: ".. interiors[ interiorID ].name, player, 158, 253, 56 )
+										outputChatBox("for the sum of: $".. interiors[ interiorID ].cost .."!", player, 158, 253, 56 )
 									else
 										outputChatBox("ERROR 0015 REPORT TO ADMIN!", player, 200, 0, 0)
 										outputDebugString(error)
@@ -132,8 +131,11 @@ function enterInterior( player, key, state, marker )
 					end
 				end
 				-- buying feature is be able to detect type automatically. eat that valhalla
+			elseif ( owner ~= 0 and locked == 0 ) then -- unlocked
+				allowInteriorTeleport( player, marker )
+			elseif ( owner ~= 0 and locked == 1 ) then
+				exports.chat:meAction( player, "attempts to open the door, but it is locked.")
 			end
-				
 		else
 			return false
 		end
@@ -158,7 +160,7 @@ function allowInteriorTeleport( player, marker )
 
 		if ( x and y and z ) then
 			-- fade out
-			setPedFrozen( player, true ) -- securitiez
+			setElementFrozen( player, true ) -- securitiez
 
 			setElementInterior(player, 0)
 			setCameraInterior(player, 0)
@@ -166,7 +168,7 @@ function allowInteriorTeleport( player, marker )
 			setElementPosition(player, x, y, z + 1)
 		
 			-- fade back in
-			setTimer(setPedFrozen, 500, 1, player, false )
+			setTimer(setElementFrozen, 500, 1, player, false )
 		end
 	else
 		local interiorID = getElementData( marker, "interiorID" )
@@ -180,7 +182,7 @@ function allowInteriorTeleport( player, marker )
 
 		if ( x and y and z and interior and dimension ) then
 			-- fade out
-			setPedFrozen( player, true ) -- securitiez
+			setElementFrozen( player, true ) -- securitiez
 
 			setElementInterior(player, interior)
 			setCameraInterior(player, interior)
@@ -188,7 +190,7 @@ function allowInteriorTeleport( player, marker )
 			setElementPosition(player, x, y, z + 1)
 		
 			-- fade back in
-			setTimer(setPedFrozen, 500, 1, player, false )
+			setTimer(setElementFrozen, 500, 1, player, false )
 		end
 	end
 end

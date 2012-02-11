@@ -41,6 +41,7 @@ function _joinConstruct()
 		setElementData(source, "username", getPlayerName( source ) )
 		setElementData(source, "loginAttempts", 0)
 		setElementData(source, "ooc", 0 )
+		setPlayerNametagColor(player, 127, 127, 127)
 		fadeCamera(source, true, 1)
 		setCameraMatrix(source, 783.44, -1287.73, 23.5, 733.9, -1276.6, 13.5)
 	end
@@ -55,12 +56,14 @@ function attemptLogin(thePlayer, username, password)
 				setElementData(thePlayer, "userid", result.id + 25565)
 				setElementData(thePlayer, "accountid", result.id)
 				setElementData(thePlayer, "atCharSelect", true)
+				setElementData(thePlayer, "adminduty", result.adminduty)
 				setElementDimension(thePlayer, getElementData(thePlayer, "userid"))
 
 				triggerClientEvent(thePlayer, "characterSelect", thePlayer)
 				triggerClientEvent(thePlayer, "toggleDashboard", thePlayer, 0)
 				setupCharacterSelect(thePlayer)
 				setElementDimension(thePlayer, getElementData(thePlayer, "userid"))
+				
 			else
 				attempts = tonumber(getElementData(thePlayer, "loginAttempts"))
 				attempts = tonumber(attempts) + 1
@@ -164,6 +167,13 @@ function playerSpawn(player, charactername)
 				setElementData(player, "atCharSelect", false)
 				setElementData(player, "characterName", charactername)
 				setElementData(player, "characterID", result.charid)
+				
+				if ( getElementData(player, "adminduty" ) == 1 ) then
+					setPlayerNametagColor(player, 255, 194, 14)
+				elseif ( getElementData( player, "adminduty" ) == 0 ) then
+					setPlayerNametagColor(player, 255, 255, 255)
+				end
+				
 				setPlayerName(player, charactername)
 			
 				toggleAllControls (player, true, true, true ) 
@@ -178,8 +188,8 @@ end
 
 function onCharacterSpawned( player, charactername )
 -- this function is triggered after we have spawned.
-	outputChatBox("Welcome to Roleplay VX!", player, 255, 130, 0)
-	outputChatBox("Press the 'end' key to change characters.", player, 255,184,0)
+	outputChatBox("Welcome to Roleplay!", player, 255, 130, 0)
+	--outputChatBox("Press the 'end' key to change characters.", player, 255,184,0)
 
 end
 addEvent("onCharacterSpawned", true)

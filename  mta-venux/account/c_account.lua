@@ -36,6 +36,7 @@ function showDashboard()
 	gui["_root"] = guiCreateWindow(left, top, windowWidth, windowHeight, "MainWindow", false)
 	guiWindowSetSizable(gui["_root"], false)
 	guiSetProperty(gui["_root"], "TitlebarEnabled", "false")
+	guiSetAlpha(gui["_root"], 0.65)
 	
 	gui["label"] = guiCreateLabel(80, 65, 90, 25, "Your username:", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["label"], "left", false)
@@ -61,7 +62,7 @@ function showDashboard()
 	
 	gui._placeHolders["line"] = {left = 190, top = 135, width = 16, height = 31, parent = gui["_root"]}
 	
-	gui["label_3"] = guiCreateLabel(10, 25, 260, 16, "Welcome to Project VenuX - Version 0.02", false, gui["_root"])
+	gui["label_3"] = guiCreateLabel(10, 25, 290, 16, "Welcome to Project VenuX - Version ".. exports.global:getVersion() .."", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["label_3"], "left", false)
 	guiLabelSetVerticalAlign(gui["label_3"], "center")
 
@@ -215,6 +216,77 @@ function charselectInfo()
 	dxDrawText( "To play as a character, click it once to view its name, then click it again to confirm.\n If you have no characters, please select 'Create Character' to get started.", width / 3.4, height / 1.08, 0, 0, tocolor(255, 255, 255, 255), 1.5)
 end
 
+gender = 0
+curskin = 0
+curskinam = 0
+
+
+Males = {7, 14, 15, 16, 17, 18, 20, 21, 22, 24, 25, 28, 35, 36, 50, 51, 66, 67, 78, 79, 80, 83, 84, 102, 103, 104, 105, 106, 107, 134, 136, 142, 143, 144, 156, 163, 166, 168, 176, 180, 182, 183, 185, 220, 221, 222, 249, 253, 260, 262, 23, 26, 27, 29, 30, 32, 33, 34, 35, 36, 37, 38, 43, 44, 45, 46, 47, 48, 50, 51, 52, 53, 58, 59, 60, 61, 62, 68, 70, 72, 73, 78, 81, 82, 94, 95, 96, 97, 98, 99, 100, 101, 108, 109, 110, 111, 112, 113, 114, 115, 116, 120, 121, 122, 124, 125, 126, 127, 128, 132, 133, 135, 137, 146, 147, 153, 154, 155, 158, 159, 160, 161, 162, 164, 165, 170, 171, 173, 174, 175, 177, 179, 181, 184, 186, 187, 188, 189, 200, 202, 204, 206, 209, 212, 213, 217, 223, 230, 234, 235, 236, 240, 241, 242, 247, 248, 250, 252, 254, 255, 258, 259, 261, 264, 49, 57, 58, 59, 60, 117, 118, 120, 121, 122, 123, 170, 186, 187, 203, 210, 227, 228, 229}
+Females = {9, 10, 11, 12, 13, 40, 41, 63, 64, 69, 76, 91, 139, 148, 190, 195, 207, 215, 218, 219, 238, 243, 244, 245, 256, 12, 31, 38, 39, 40, 41, 53, 54, 55, 56, 64, 75, 77, 85, 86, 87, 88, 89, 90, 91, 92, 93, 129, 130, 131, 138, 140, 145, 150, 151, 152, 157, 172, 178, 192, 193, 194, 196, 197, 198, 199, 201, 205, 211, 214, 216, 224, 225, 226, 231, 232, 233, 237, 243, 246, 251, 257, 263, 38, 53, 54, 55, 56, 88, 141, 169, 178, 224, 225, 226, 263}
+
+function nextSkin()
+	local array = nil
+	if (gender==0) then
+		array = Males
+	elseif (gender==1) then 
+		array = Females
+	end
+	
+	-- Get the next skin
+	if (curskin==#array) then
+		curskin = 1
+		skin = array[1]
+		setElementModel(getLocalPlayer(), tonumber(skin))
+	else
+		curskin = curskin + 1
+		skin = array[curskin]
+		setElementModel(getLocalPlayer(), tonumber(skin))
+	end
+end
+
+function reverseSkin()
+	local array = nil
+	if (gender==0) then 
+		array = Males
+	elseif (gender==1) then 
+		array = Females
+	end
+	
+	-- Get the next skin
+	if (curskin==1) then
+		curskin = #array
+		skin = array[1]
+		setElementModel(getLocalPlayer(), tonumber(skin))
+	else
+		curskin = curskin - 1
+		skin = array[curskin]
+		setElementModel(getLocalPlayer(), tonumber(skin))
+	end
+end
+
+function setMale()
+	gender = 0
+	generateSkin()
+end
+
+function setFemale()
+	gender = 1
+	generateSkin()
+end
+
+function generateSkin()
+	if (gender==0) then -- MALE
+			curskinam = math.random(1, #Males)
+			skin = Males[curskinam]
+			setElementModel(getLocalPlayer(), skin)
+	elseif (gender==1) then -- FEMALE
+			curskinam = math.random(1, #Females)
+			skin = Females[curskinam]
+			setElementModel(getLocalPlayer(), skin)
+	end
+	curskin = skin
+end
+
 
 function creationProcess()
 	creationWin = {} -- I prefer to make guis with tables, that way you can later on build more gui elements in the same function. Neatens your work up a bit.
@@ -237,10 +309,10 @@ function creationProcess()
 	creationLabel[5] = guiCreateLabel(117,198,62,22,"Select Skin",false,creationWin[1])
 
 	creationButton[4] = guiCreateButton(191,238,66,39,"-->",false,creationWin[1])
-	addEventHandler("onClientGUIClick", creationButton[4], forwardSkin)
+	addEventHandler("onClientGUIClick", creationButton[4], nextSkin, true)
 
 	creationButton[5] = guiCreateButton(35,238,66,39,"<--",false,creationWin[1])
-	addEventHandler("onClientGUIClick", creationButton[5], reverseSkin)
+	addEventHandler("onClientGUIClick", creationButton[5], reverseSkin, false)
 
 	creationLabel[6] = guiCreateLabel(122,297,41,17,"Gender",false,creationWin[1])
 	creationRadio[1] = guiCreateRadioButton(65,328,47,19,"Male",false,creationWin[1])
@@ -250,93 +322,11 @@ function creationProcess()
 	addEventHandler("onClientGUIClick", creationRadio[2], setFemale)
 	addEventHandler("onClientGUIClick", creationButton[1], function() destroyElement(creationWin[1]) characterSelect() clickStop(true) end, false)
 	addEventHandler("onClientGUIClick", creationButton[3], function()
-
-		if guiRadioButtonGetSelected(creationRadio[1]) == true then
-			gender = 1
-		else
-			gender = 0
-		end
-
-		generateSkin()
+		checkInputInfo( guiGetText( creationEdit[1] ), guiGetText( creationEdit[3] ), guiGetText( creationEdit[4] ), getElementModel( getLocalPlayer() ), guiGetText( creationEdit[2] ), gender )
 		clickStop(true) 
-		checkInputInfo( guiGetText( creationEdit[1] ), guiGetText( creationEdit[3] ), guiGetText( creationEdit[4] ), getElementModel( getLocalPlayer() ), guiGetText( creationEdit[2] ), gender ) 
 		end, false)
-end
-
-gender = 0
-skincolor = 1
-curskin = 0
-
-Males = {7, 14, 15, 16, 17, 18, 20, 21, 22, 24, 25, 28, 35, 36, 50, 51, 66, 67, 78, 79, 80, 83, 84, 102, 103, 104, 105, 106, 107, 134, 136, 142, 143, 144, 156, 163, 166, 168, 176, 180, 182, 183, 185, 220, 221, 222, 249, 253, 260, 262, 23, 26, 27, 29, 30, 32, 33, 34, 35, 36, 37, 38, 43, 44, 45, 46, 47, 48, 50, 51, 52, 53, 58, 59, 60, 61, 62, 68, 70, 72, 73, 78, 81, 82, 94, 95, 96, 97, 98, 99, 100, 101, 108, 109, 110, 111, 112, 113, 114, 115, 116, 120, 121, 122, 124, 125, 126, 127, 128, 132, 133, 135, 137, 146, 147, 153, 154, 155, 158, 159, 160, 161, 162, 164, 165, 170, 171, 173, 174, 175, 177, 179, 181, 184, 186, 187, 188, 189, 200, 202, 204, 206, 209, 212, 213, 217, 223, 230, 234, 235, 236, 240, 241, 242, 247, 248, 250, 252, 254, 255, 258, 259, 261, 264, 49, 57, 58, 59, 60, 117, 118, 120, 121, 122, 123, 170, 186, 187, 203, 210, 227, 228, 229}
-Females = {9, 10, 11, 12, 13, 40, 41, 63, 64, 69, 76, 91, 139, 148, 190, 195, 207, 215, 218, 219, 238, 243, 244, 245, 256, 12, 31, 38, 39, 40, 41, 53, 54, 55, 56, 64, 75, 77, 85, 86, 87, 88, 89, 90, 91, 92, 93, 129, 130, 131, 138, 140, 145, 150, 151, 152, 157, 172, 178, 192, 193, 194, 196, 197, 198, 199, 201, 205, 211, 214, 216, 224, 225, 226, 231, 232, 233, 237, 243, 246, 251, 257, 263, 38, 53, 54, 55, 56, 88, 141, 169, 178, 224, 225, 226, 263}
-
-
-function forwardSkin()
-			local array = nil
-				if (gender==0) then -- MALE
-					array = Males
-				elseif (gender==1) then -- FEMALE
-					array = Females
-				end
-			
-			-- Get the next skin
-			if (curskin==#array) then
-				curskin = 1
-				skin = array[1]
-				setElementModel(getLocalPlayer(), tonumber(skin))
-			else
-				curskin = curskin + 1
-				skin = array[curskin]
-				setElementModel(getLocalPlayer(), tonumber(skin))
-			end
-end
 		
-
-function reverseSkin()
-			local array = nil
-				if (gender==0) then -- MALE
-					array = Males
-				elseif (gender==1) then -- FEMALE
-					array = Females
-				end
-			
-			
-			-- Get the next skin
-			if (curskin==1) then
-				curskin = #array
-				skin = array[1]
-				setElementModel(getLocalPlayer(), tonumber(skin))
-			else
-				curskin = curskin - 1
-				skin = array[curskin]
-				setElementModel(getLocalPlayer(), tonumber(skin))
-			end
-end
-
-
-function setMale(button, state)
-		gender = 0
-		generateSkin()
-end
-
-function setFemale(button, state)
-		gender = 1
-		generateSkin()
-
-end
-
-function generateSkin()
-	local skinint = 0
-	if (gender==0) then -- MALE
-			skinint = math.random(1, #Males)
-			skin = Males[skinint]
-			setElementModel(getLocalPlayer(), skin)
-	elseif (gender==1) then -- FEMALE
-			skinint = math.random(1, #Females)
-			skin = Females[skinint]
-			setElementModel(getLocalPlayer(), skin)
-	end
-	curskin = skinint
+	generateSkin()
 end
 
 
