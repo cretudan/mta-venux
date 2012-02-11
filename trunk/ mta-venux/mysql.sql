@@ -1,22 +1,29 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.9
+-- version 3.4.5
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jan 12, 2012 at 03:44 PM
--- Server version: 5.1.49
--- PHP Version: 5.3.3-7+squeeze3
+-- Machine: localhost
+-- Genereertijd: 11 feb 2012 om 13:12
+-- Serverversie: 5.5.16
+-- PHP-Versie: 5.3.8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Database: `RPVX`
+-- Database: `rpvx`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accounts`
+-- Tabelstructuur voor tabel `accounts`
 --
 
 CREATE TABLE IF NOT EXISTS `accounts` (
@@ -25,14 +32,16 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `password` varchar(180) NOT NULL,
   `serial` varchar(200) NOT NULL,
   `rank` int(2) NOT NULL,
+  `adminduty` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `characters`
+-- Tabelstructuur voor tabel `characters`
 --
 
 CREATE TABLE IF NOT EXISTS `characters` (
@@ -61,12 +70,12 @@ CREATE TABLE IF NOT EXISTS `characters` (
   `interior` int(5) NOT NULL DEFAULT '0',
   `dimension` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`charid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `interiors`
+-- Tabelstructuur voor tabel `interiors`
 --
 
 CREATE TABLE IF NOT EXISTS `interiors` (
@@ -87,19 +96,13 @@ CREATE TABLE IF NOT EXISTS `interiors` (
   `rented` int(1) NOT NULL,
   `renter` int(40) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Dumping data for table `interiors`
---
-
-INSERT INTO `interiors` (`id`, `name`, `type`, `interior`, `dimension`, `owner`, `locked`, `x`, `y`, `z`, `intx`, `inty`, `intz`, `cost`, `rented`, `renter`) VALUES
-(1, 'Ryan''s Crack Palace', 1, 2, 10001, '0', 0, 824.728, -1422.85, 13.4944, 2468.38, -1698.4, 1012.51, 10000, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `items`
+-- Tabelstructuur voor tabel `items`
 --
 
 CREATE TABLE IF NOT EXISTS `items` (
@@ -109,13 +112,13 @@ CREATE TABLE IF NOT EXISTS `items` (
   `owner` int(10) NOT NULL,
   `itemvalue` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vehicles`
+-- Tabelstructuur voor tabel `vehicles`
 --
 
 CREATE TABLE IF NOT EXISTS `vehicles` (
@@ -151,4 +154,8 @@ CREATE TABLE IF NOT EXISTS `vehicles` (
   `blue2` int(3) NOT NULL,
   `health` int(5) NOT NULL,
   PRIMARY KEY (`vehicleID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -58,7 +58,7 @@ function showInventory(items)
 	addEventHandler ( "onClientGUIClick", gui["listWidget"], clickedItem )
 	if ( type( items ) == "table" ) then -- this is very important, otherwise inventory wont work :)
 	-- items table is for the client player only, otherwise some fat fuck will make a tool to see other peoples' inventory.
-		myItems = items -- This is just because i am not going to wake your cpu up to run a loop, which would be bad anyway.
+		myItems = items
 		gui["row"] = {}
 		for i, v in ipairs( myItems ) do
 			gui["row"].i = guiGridListAddRow(gui["listWidget"])
@@ -75,7 +75,8 @@ end
 
 function clickedItem( button, state, sx, sy, x, y, z, elem )
 	if ( button == "left") then
-		local itemindex = guiGridListGetItemText ( gui["listWidget"], guiGridListGetSelectedItem ( gui["listWidget"] ), 1 )
+		-- The + 1 is critical, because the gridlists count from zero, and we start at 1 :-)
+		local itemindex = guiGridListGetSelectedItem ( gui["listWidget"] ) + 1
 		if ( selectedIndex == tonumber( itemindex ) ) then 
 			selectedIndex = nil
 			removeEventHandler("onClientRender", _root, draw3DOverlay)

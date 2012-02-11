@@ -323,7 +323,7 @@ end
 
 function getVehicleByID( vehicleID )
 	if ( vehicleIDs[ vehicleID ] ~= nil ) then
-		return vehicleIDs[ vehicleID]
+		return vehicleIDs[ vehicleID ]
 	else
 		return MISSING_ARGUMENTS
 	end

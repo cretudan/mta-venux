@@ -15,10 +15,10 @@ local max_results = 128
 -- connection functions
 local function connect( )
 	-- retrieve the settings
-	local server = get( "server" ) or ""
-	local user = get( "user" ) or ""
-	local password = get( "password" ) or ""
-	local db = get( "database" ) or ""
+	local server = get( "server" ) or "" -- server
+	local user = get( "user" ) or "" -- username
+	local password = get( "password" ) or "" -- password
+	local db = get( "database" ) or "" -- database
 	local port = get( "port" ) or 3306
 	local socket = get( "socket" ) or nil
 	

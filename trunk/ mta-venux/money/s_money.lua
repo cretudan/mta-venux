@@ -47,9 +47,10 @@ function takeMoney(thePlayer, amount, rest)
 				exports.sql:query_free("UPDATE `characters` SET `cash` = cash - " .. amount .. " WHERE charid = '" .. getElementData( thePlayer, "characterID" ) .."' " )
 				takePlayerMoney( thePlayer, amount )
 			return true, amount
+			end
 		end
-	end
 	return false, 0
+	end
 end
 
 function setMoney(thePlayer, amount)

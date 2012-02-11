@@ -4,4 +4,6 @@
   <script src="s_admin.lua" type="server" />
   <script src="c_admin.lua" type="client" />
   
+  <script src="s_vehicle.lua" type="server" />
+  
 </meta>

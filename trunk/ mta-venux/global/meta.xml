@@ -5,6 +5,8 @@
   <script src="util_s.lua" type="server"/>
   <script src="g_character.lua" type="server"/>
   <script src="g_admin.lua" type="server"/>
+  <script src="globals_s.lua" type="server"/>
+  <script src="globals_c.lua" type="client"/>
 
   <export function="findPlayerByPartialNick" type="server"/>
   
@@ -15,5 +17,6 @@
   <export function="isPlayerHeadAdmin" type="server"/>
   <export function="isPlayerOwner" type="server"/>
   <export function="isPlayerDeveloper" type="server"/>
+  <export function="getVersion" type="client"/>
   
 </meta>

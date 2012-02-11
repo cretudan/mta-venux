@@ -69,7 +69,7 @@ function findPlayerByPartialNick(thePlayer, partialNick)
 				outputChatBox("No such player found.", thePlayer, 255, 0, 0)
 			else
 				outputChatBox( #candidates .. " players matching:", thePlayer, 255, 194, 14)
-				for ( _, arrayPlayer in ipairs( candidates ) ) do
+				for  _, arrayPlayer in ipairs( candidates )  do
 					outputChatBox("  (" .. tostring( getElementData( arrayPlayer, "playerid" ) ) .. ") " .. getPlayerName( arrayPlayer ), thePlayer, 255, 255, 0)
 				end
 			end
