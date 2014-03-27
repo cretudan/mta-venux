@@ -1,9 +1,8 @@
 --[[
----			|\-/| Roleplay VX Version one |\-/|  ---
----		     Developer: AeroXbird & Lukkaz	     ---
----			    Special Thanks: Mabako			 ---
----					SQL SYSTEM					 ---
----		   Copyright (c) 2010 MTA: Paradise		 ---
+--    <<< VENUX _ SWIFT >>>
+--      DEV: AeroXbird
+---	 Special Thanks: Mabako
+---	      SQL SYSTEM		
 --]]
 
 local connection = nil

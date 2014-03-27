@@ -1,8 +1,7 @@
 --[[
----			|\-/| Roleplay VX Version one |\-/|  ---
----		     Developer: AeroXbird & Lukkaz	     ---
+--    <<< VENUX _ SWIFT >>>
+--      DEV: AeroXbird
 --]]
--- The beating of a million drums, The fire of a million guns, The mother of a million sons. <-- A true whore.
 
 _root = getRootElement()
 
@@ -119,40 +118,28 @@ local theVehicle = getPedOccupiedVehicle ( thePlayer )
 local vehicleID = vehicles[ theVehicle ].vehicleID
 	if ( theVehicle and thePlayer ) then
 		if ( getPedOccupiedVehicleSeat( thePlayer ) == 0 ) then -- mta lua vm is like politics, works in mysterious ways.
-			if ( isVehicleLocked( theVehicle ) == true ) then
-				setVehicleLocked( theVehicle, false ) 
-				local success, error = exports.sql:query_free("UPDATE `vehicles` SET locked = '0' WHERE vehicleID = '".. tonumber( vehicleID ) .."'")
-					if ( success == false ) then
-						outputDebugString( error, 2 ) 
-					end
-					exports.chat:meAction( thePlayer, "unlocks the vehicle doors.")
-			elseif ( isVehicleLocked( theVehicle ) == false ) then
-				setVehicleLocked( theVehicle, true )
-				local success, error = exports.sql:query_free("UPDATE `vehicles` SET locked = '1' WHERE vehicleID = '".. tonumber( vehicleID ) .."'")
-					if ( success == false ) then
-						outputDebugString( error, 2 )
-					end
-					exports.chat:meAction( thePlayer, "locks the vehicle doors.")
-			end
-		else -- we're not in vehicle, for now this does not do a lot, but in the future we can edit this to trigger cool things.
-			if ( isVehicleLocked( theVehicle ) == true ) then
-				setVehicleLocked( theVehicle, false ) 
-				local success, error = exports.sql:query_free("UPDATE `vehicles` SET locked = '0' WHERE vehicleID = '".. tonumber( vehicleID ) .."'")
-					if ( success == false ) then
-						outputDebugString( error, 2 ) 
-					end
-					exports.chat:meAction( thePlayer, "unlocks the vehicle doors.")
-			elseif ( isVehicleLocked( theVehicle ) == false ) then
-				setVehicleLocked( theVehicle, true )
-				local success, error = exports.sql:query_free("UPDATE `vehicles` SET locked = '1' WHERE vehicleID = '".. tonumber( vehicleID ) .."'")
-					if ( success == false ) then
-						outputDebugString( error, 2 )
-					end
-					exports.chat:meAction( thePlayer, "locks the vehicle doors.")
+			_changeVehicleLockstate( thePlayer, theVehicle )
+		else -- we're not in the driver seat, for now this does not do a lot, but in the future we can edit this to trigger cool things.
+				outputChatBox("You are not in the drivers seat, so you cannot lock the vehicle.")
 			end
 		end
 	else -- we're not in a vehicle, assuming we are near it?
-		-- wait for me to finish interior system, then we can check nearby cars.
+		local pX, pY, pZ = getElementPosition( thePlayer )
+		local sphere = createColSphere ( pX, pY, pZ, 10 )
+		local elements = getElementsWithinColShape ( sphere, "vehicle" )
+		
+		-- get rid of the collision sphere since we no longer need it.
+		destroyElement ( sphere )
+		sphere = nil
+		
+		for i, v in ipairs( elements ) do
+			local vehID = getElementData( v, "vehicleID" )
+			
+			-- if we have the keys for this car :)
+			if ( exports.inventory:has( thePlayer, vehID, 2 ) ) then
+				_changeVehicleLockstate( thePlayer, v )
+			end
+		end
 	end	
 end
 
@@ -351,7 +338,6 @@ addCommandHandler("bindmykeys", _constructPlayerJoin2)
 
 
 addEventHandler("onPlayerJoin", _root, _constructPlayerJoin)
-
 addEventHandler("onVehicleEnter", _root, _enterVehicle)
 	
 

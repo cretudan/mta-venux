@@ -1,7 +1,6 @@
 --[[
----		|\-/| Roleplay VX Version one |\-/|      ---
----		  Developer: Lukkaz & AeroXbird	         ---
----					Chat System				     ---
+--    <<< VENUX _ SWIFT >>>
+--      DEV: AeroXbird
 --]]
 
 --TODO: Add some way to check if the player is dead / dying or muted by an admin :p

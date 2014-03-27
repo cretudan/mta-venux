@@ -1,7 +1,7 @@
 --[[
----			|\-/| Roleplay VX Version one |\-/|  ---
----				Original Script by ryden	     ---
----				Edited by: Lukkaz				 ---
+--    <<< VENUX _ SWIFT >>>
+---	 Original Script by ryden
+--      DEV: AeroXbird
 --]]
 
 
@@ -14,7 +14,7 @@ Handles the resource start event to create a dummy entity with information about
 --]]
 addEventHandler ( "onResourceStart", getResourceRootElement(getThisResource()), function ()
 	scoreboardDummy = createElement ( "scoreboard" )
-	setElementData ( scoreboardDummy, "serverName", "Roleplay VX" )
+	setElementData ( scoreboardDummy, "serverName", "VenuX" )
 	setElementData ( scoreboardDummy, "maxPlayers", getMaxPlayers () )
 	setElementData ( scoreboardDummy, "allow", true )
 	

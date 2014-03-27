@@ -1,8 +1,7 @@
 --[[
----			|\-/| Roleplay VX Version one |\-/|  ---
----		     Developer: AeroXbird & Lukkaz	     ---
+--    <<< VENUX _ SWIFT >>>
+--      DEV: AeroXbird
 --]]
-
 
 function savePlayer(player)
 	if ( getElementType( player ) == "player" ) then

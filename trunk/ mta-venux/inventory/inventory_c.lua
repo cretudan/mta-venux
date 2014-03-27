@@ -1,6 +1,6 @@
 --[[
----			|\-/| Roleplay VX Version one |\-/|  ---
----		     Developer: AeroXbird 			     ---
+--    <<< VENUX _ SWIFT >>>
+--      DEV: AeroXbird
 --]]
 	
 local _root = getRootElement()
@@ -9,16 +9,16 @@ local windowWidth, windowHeight = 450, 288
 local left = sx/2 - sx/2
 local top = sy/2 - sy/2
 
-gui = {}
+local gui = 
+{
+	local _placeHolders = {}
+}
 
-gui._placeHolders = {}
-
-myItems = {}
+local myItems = {}
 
 local selectedIndex = nil
 
-alpha = 1
-windowAlpha = 1
+local alpha, windowAlpha = 1, 1
 
 function getX(xcoord)
 	return sx / 100 * xcoord

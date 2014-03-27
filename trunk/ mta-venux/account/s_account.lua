@@ -1,23 +1,19 @@
 --[[
----			|\-/| Roleplay VX Version one |\-/|  ---
----		     Developer: AeroXbird & Lukkaz	     ---
+--    <<< VENUX _ SWIFT >>>
+--      DEV: AeroXbird
 --]]
--- random quote:
--- I get happy when i just got laid.
--- A.
 
 --TODO LIST!
--- * ADD ADMIN DUTY
 -- * SAVE MORE DATA INTO ELEMENT
 
 _root = getRootElement();
 
 local attempts = 0
-local startingPay = 200 --change this to change how much your players get when they create a character.
+local startingPay = 200 -- change this to change how much your players get when they create a character.
 
 pedTable = {}
 
--- TODO: Add new values once i get the time.
+-- TODO: Add new values once I get the time.
 function _construct()
 	for i, v in ipairs(getElementsByType("player")) do -- find every one of you's in this place
 		toggleAllControls (v, false, false, true ) 
@@ -31,7 +27,7 @@ function _construct()
 	end
 end
 
--- TODO: Add some new values once i get the time.
+-- TODO: Add some new values once I get the time.
 function _joinConstruct()
 	if ( getElementType(source) == "player" ) then
 		toggleAllControls (source, false, false, true ) 
@@ -147,7 +143,6 @@ end
 function playerSpawn(player, charactername)
 	if ( player and charactername ) then
 			local result = exports.sql:query_assoc_single("SELECT * FROM `characters` WHERE charactername = '".. charactername .."' ")
-
 			if ( result ) then 
 
 				spawnPlayer(player, 0, 0, 0, 0, characterskin )
@@ -218,8 +213,6 @@ function _playerQuit(quitType, reason, responsibleElement)
 	end
 end
 
-
-
 function createCharacter(name, weight, height, skin, age, gender)
 	local accntID = getElementData(source, "accountid")
 	result = exports.sql:query_assoc_single("SELECT charactername FROM `characters` WHERE charactername = '".. name .."' ")
@@ -232,8 +225,7 @@ function createCharacter(name, weight, height, skin, age, gender)
 		outputChatBox("* Your character has successfully been created!", source, 0, 255, 127)
 		triggerClientEvent(source, "characterSelect", source)
 	end
-end
-					  
+end			  
 
 function reloadPeds( player )
 	if ( pedTable ~= nil ) then
@@ -296,8 +288,6 @@ end
 
 
 ---------------------------------------------------------------------------
-
-
 
 function returnHome(source, commandName)
 	setElementDimension(source, tonumber(getElementData(source, "userid"))) -- make the current character disapear
