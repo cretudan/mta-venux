@@ -1,13 +1,13 @@
 --[[
----			|\-/| Roleplay VX Version one |\-/|  ---
----		        Developer: AeroXbird 		     ---
+--    <<< VENUX _ SWIFT >>>
+--      DEV: AeroXbird
 --]]
+
 local titles = { "Trial Moderator", "Moderator", "Administrator", "Super Administrator", "Head Administrator", "Owner", "Scripter" }
 
 function getPlayerAdminLevel( thePlayer )
 	return tonumber( getElementData( thePlayer, "adminrank" ) ) or 0
 end
-
 
 function getPlayerAdminTitle(thePlayer)
 	local text = titles[getPlayerAdminLevel(thePlayer)] or "Player"

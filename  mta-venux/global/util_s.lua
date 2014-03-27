@@ -1,10 +1,7 @@
 --[[
----			|\-/| Roleplay VX Version one |\-/|  ---
----		     Developer: AeroXbird & Lukkaz	     ---
+--    <<< VENUX _ SWIFT >>>
+--      DEV: AeroXbird
 --]]
--- random quote:
--- Black sky find your own way to fly.
--- A.
 
 function playerPosition(playerSource)
 	x, y, z = getElementPosition(playerSource)

@@ -1,6 +1,6 @@
 --[[
----			|\-/| Roleplay VX Version one |\-/|  ---
----		        Developer: AeroXbird 		     ---
+--    <<< VENUX _ SWIFT >>>
+--      DEV: AeroXbird
 --]]
 
 local BUILD = "1.0 'Swift'"

@@ -1,7 +1,7 @@
 --[[
----			|\-/| Roleplay VX Version one |\-/|  ---
----				Original Script by ryden
----				Edited by: AeroXbird & Lukkaz	 ---
+--    <<< VENUX _ SWIFT >>>
+---	 Original Script by ryden
+--      DEV: AeroXbird
 --]]
 
 

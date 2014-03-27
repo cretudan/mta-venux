@@ -1,6 +1,6 @@
 --[[
----			|\-/| Roleplay VX Version one |\-/|  ---
----			  Developer: AeroXbird & Lukkaz			 ---
+--    <<< VENUX _ SWIFT >>>
+--      DEV: AeroXbird
 --]]
 
 _root = getRootElement()

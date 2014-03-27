@@ -1,8 +1,8 @@
 --[[
----			|\-/| Roleplay VX Version one |\-/|  ---
----		     Developer: AeroXbird       	     ---
+--    <<< VENUX _ SWIFT >>>
+--      DEV: AeroXbird
 --]]
--- random quote: asl? RATATATATATATATAAAA RUUUUUUNN!! THEY'RE COMING FOR US!
+
 sql = exports.sql
 
 items = {}
@@ -42,7 +42,7 @@ function load( player )
 		local i, error = sql:query_assoc( "SELECT * FROM `items` WHERE owner = ".. charid .." ORDER BY `id` ASC")
 
 		for key, value in ipairs( i ) do
-		-- save all of our items nice and ordered in the great invention called a table.
+			-- save all of our items nice and ordered in the great invention called a table.
 			items[player][key] = {}
 			items[player][key].id = value.id
 			items[player][key].itemid = value.itemid
@@ -50,7 +50,7 @@ function load( player )
 			items[player][key].owner = charid
 			items[player][key].itemname = tostring ( value.itemname )
 		end
-			return true
+		return true
 end
 
 function has( player, itemValue, itemID )

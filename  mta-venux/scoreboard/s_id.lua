@@ -1,8 +1,8 @@
----			|\-/| Roleplay VX Version one |\-/|  ---
----				Original Script by ryden
----				Edited by: Lukkaz				 ---
+--[[
+--    <<< VENUX _ SWIFT >>>
+---	 Original Script by ryden
+--      DEV: AeroXbird
 --]]
-
 
 local ids = { } --creates a table for all your ids
 

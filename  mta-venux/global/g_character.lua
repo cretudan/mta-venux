@@ -1,4 +1,4 @@
 --[[
----			|\-/| Roleplay VX Version one |\-/|  ---
----		        Developer: AeroXbird 		     ---
+--    <<< VENUX _ SWIFT >>>
+--      DEV: AeroXbird
 --]]

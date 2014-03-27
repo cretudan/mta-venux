@@ -1,6 +1,8 @@
 --[[
-Copyright (c) 2010 MTA: Paradise
-]]
+--    <<< VENUX _ SWIFT >>>
+---	 Original Script by mabako
+--      DEV: AeroXbird
+--]]
 
 local allowUpdate = get( 'auto_update' ) ~= 0 -- change this setting to 0 to only print the required queries to console but not actually change stuff, removing it or setting it to anything but 0 leaves it enabled
 
